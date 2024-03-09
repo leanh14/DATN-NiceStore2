@@ -2,6 +2,7 @@ package com.example.duantn.repository;
 
 import com.example.duantn.model.ChucVu;
 import com.example.duantn.model.HoaDon;
+import com.example.duantn.record.OrderDetailRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,6 +19,22 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
 
     @Query(value = "select * from HoaDon where Ma =:maInput ",
             countQuery = "select * from HoaDon where Ma =:maInput", nativeQuery = true)
-    public HoaDon getHoaDonBy_ma(@Param("maInput") String maHoaDon);
+    HoaDon getHoaDonBy_ma(@Param("maInput") String maHoaDon);
 
+    @SuppressWarnings("all")
+    @Query("""
+    select new com.example.duantn.record.OrderDetailRecord(
+        od.hoaDon.id,
+        od.hoaDon.ma,
+        product.ten,
+        cast(pd.giaTriSanPham as double),
+        cast(od.soLuong as int),
+        cast(od.soLuong * pd.giaTriSanPham as double))
+        from HoaDonChiTiet od
+        left join od.hoaDon hoaDon
+        left join od.chiTietSanPham pd
+        left join pd.sanPham product
+        where od.hoaDon.id = :orderId
+    """)
+    List<OrderDetailRecord> findByOrderId(UUID orderId);
 }

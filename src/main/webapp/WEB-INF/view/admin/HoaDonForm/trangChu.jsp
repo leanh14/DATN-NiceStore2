@@ -267,7 +267,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-lg-10">
-                            <strong class="card-title" ><h3>Danh sách sản phẩm chi tiết</h3></strong>
+                            <strong class="card-title" ><h3>Danh sách hóa đơn</h3></strong>
                             <hr>
                         </div>
                         <div class="col-lg-10" style="margin-left: 1100px">
@@ -418,7 +418,7 @@
                                 <td>${hd.hinhThucTT}</td>
                                 <td>${hd.trangThai == 1? "Đã thanh toán" :"Chờ thanh toán"}</td>
 
-                                <td>  <a href="/hoa-don/detail/${hd.id}" class="btn btn-success"><i class="menu-icon fa fa-pencil-square-o"></i></a></td>
+                                <td>  <a href="/hoa-donct/detail/${hd.id}" class="btn btn-success"><i class="menu-icon fa fa-pencil-square-o"></i></a></td>
 
                                 <td>
                                     <a href="/hoa-don/delete/${hd.id}" class="btn btn-warning"  onclick="return confirm('Bạn chắc chắn muốn xóa không? ${hd.ma}?')"><i class="menu-icon fa fa-trash-o"></i> </a>
