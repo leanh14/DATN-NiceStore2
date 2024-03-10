@@ -147,6 +147,7 @@ public class CartController {
         String maHoaDon = String.valueOf(randomInt);
         hoaDon.setTenKH(datHangRequest.getHoVaTen());
         hoaDon.setDiaChi(datHangRequest.getDiaChi());
+        hoaDon.setMa(maHoaDon);
         hoaDon.setGhiChu(datHangRequest.getGhiChu());
         hoaDon.setSoDT(datHangRequest.getSoDT());
         hoaDon.setTongTienThanhToan(gioHangThanhToan.tongTienTrongGioHang());
@@ -162,9 +163,6 @@ public class CartController {
         // thêm thông tin đơn hàng vào hóa đơn - trong database
         HoaDon hoaDon1 = hoaDonService.themMoi(hoaDon);
         UUID id_hoaDon = hoaDon1.getId();
-
-        System.out.println("Thêm mới hóa đơn thành công ");
-
         // lấy hóa đơn ra theo mã hóa đơn phía trên => thêm sản phẩm vào hóa đơn chi tiết
 //        HoaDon hoaDon1 = hoaDonService.layHoaDonTheoMa(maHoaDon);
 

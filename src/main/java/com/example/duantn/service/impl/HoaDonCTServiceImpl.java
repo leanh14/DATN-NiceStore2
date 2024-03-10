@@ -84,7 +84,7 @@ public class HoaDonCTServiceImpl implements BaseService<HoaDonChiTiet> {
 
     @Override
     public void themMoi(HoaDonChiTiet entity) {
-
+        hoaDonCTRepository.save(entity);
     }
 
     @Override
