@@ -16,20 +16,20 @@ public abstract class BaseModel { //:)))
     @Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    protected UUID id;
 
     @Column(name = "NgaySua")
-    private Date ngaySua;
+    protected Date ngaySua;
 
     @Column(name = "NgayTao")
-    private Date ngayTao;
+    protected Date ngayTao;
 
     @Column(name = "NguoiSua")
-    private Integer nguoiSua;
+    protected Integer nguoiSua;
 
     @Column(name = "NguoiTao")
-    private Integer nguoiTao;
+    protected Integer nguoiTao;
 
     @Column(name = "TrangThai")
-    private Integer trangThai;
+    protected Integer trangThai;
 }

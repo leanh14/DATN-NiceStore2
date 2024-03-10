@@ -228,59 +228,6 @@
         </div>
     </header><!-- /header -->
     <!-- Header-->
-
-
-    <div class="content">
-
-        <div class="card col-lg-12">
-            <div class="card-header">
-                <div class="col-lg-10">
-                    <strong class="card-title"><h2>Bộ lọc </h2></strong>
-                    <hr>
-                </div>
-                <div class="row">
-                    <form class="row g-3">
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" placeholder="Nhập tên sản phẩm" required>
-                            <button class="btn btn-primary" type="submit">Tìm kiếm</button>
-                            <button class="btn btn-primary" style="margin-right: 1000px" type="submit">Làm mới</button>
-
-
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="validationDefault01" class="form-label">Mã khuyến mãi</label>
-                            <input type="text" class="form-control" id="validationDefault01" placeholder="Tìm kiếm"
-                                   required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Số lượng tồn</label>
-                            <input type="text" class="form-control" placeholder="Tìm kiếm" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Từ ngày</label>
-                            <input class="form-control" type="date" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Giá trị giảm</label>
-                            <input type="text" class="form-control" placeholder="Tìm kiếm" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Trạng thái</label>
-                            <input type="text" class="form-control" placeholder="Tìm kiếm" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Đến ngày</label>
-                            <input type="date" class="form-control" required>
-                        </div>
-
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div><!-- .content -->
-
     <div class="content" style="margin-top: -50px;">
         <div class="animated fadeIn">
             <div class="card col-lg-12">
@@ -294,11 +241,34 @@
                 </div>
                 <br>
             </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="orderId">Mã hóa đơn</label>
+                            <input type="text" class="form-control" id="orderId" readonly="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="orderDate">Ngày mua</label>
+                            <input type="date" class="form-control" id="orderDate" readonly="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="payDate">Ngày thanh toán</label>
+                            <input type="date" class="form-control" id="payDate" readonly="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="totalMoney">Tổng tiền</label>
+                            <input type="text" class="form-control" id="totalMoney" readonly="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table>
+                    <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
+                            <th>STT</th>
                             <th>Mã hóa đơn</th>
                             <th>Tên sản phẩm</th>
                             <th>Số lượng</th>
@@ -307,16 +277,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${orderDetailList}" var="orderDetail">
+                        <c:forEach items="${orderDetailList}" var="orderDetail" varStatus="loop">
                         <tr>
+                            <td>${loop.index + 1}</td>
                             <td>${orderDetail.orderCode}</td>
                             <td>${orderDetail.productName}</td>
                             <td>${orderDetail.quantity}</td>
                             <td>${orderDetail.price}</td>
                             <td>${orderDetail.totalMoney}</td>
                         </tr>
+                        </c:forEach>
                     </table>
-                    </c:forEach>
+
                 </div>
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-lg-4">
@@ -386,8 +358,21 @@
 <script src="/admin/assets/js/main.js"></script>
 
 <script>
-    // Sử dụng JavaScript để đặt giá trị của trường ngày thành ngày hôm nay
-    document.getElementById('dateToday').valueAsDate = new Date();
+
+    const currentURL = window.location.href;
+    const regex = /\/detail\/([^\/]+)/;
+    const match = currentURL.match(regex);
+    const id = match ? match[1] : null;
+    const apiUrl = `http://localhost:8080/api/v2/order/${id}`;
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('orderId').value = data?.id;
+            document.getElementById('orderDate').value = data?.ngayMua;
+            document.getElementById('payDate').value = data?.ngayThanhToan;
+            document.getElementById('totalMoney').value = data?.tongTienThanhToan;
+        });
+
 </script>
 
 </body>

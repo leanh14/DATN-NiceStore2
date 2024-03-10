@@ -23,18 +23,19 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
 
     @SuppressWarnings("all")
     @Query("""
-    select new com.example.duantn.record.OrderDetailRecord(
-        od.hoaDon.id,
-        od.hoaDon.ma,
-        product.ten,
-        cast(pd.giaTriSanPham as double),
-        cast(od.soLuong as int),
-        cast(od.soLuong * pd.giaTriSanPham as double))
-        from HoaDonChiTiet od
-        left join od.hoaDon hoaDon
-        left join od.chiTietSanPham pd
-        left join pd.sanPham product
-        where od.hoaDon.id = :orderId
-    """)
+         select new com.example.duantn.record.OrderDetailRecord(
+             od.hoaDon.id,
+             od.hoaDon.ma,
+             product.ten,
+             cast(pd.giaTriSanPham as double),
+             cast(od.soLuong as int),
+             cast(od.soLuong * pd.giaTriSanPham as double))
+         from HoaDonChiTiet od
+         left join od.hoaDon hoaDon
+         left join od.chiTietSanPham pd
+         left join pd.sanPham product
+         where od.hoaDon.id = :orderId
+         order by od.ngayTao desc
+        """)
     List<OrderDetailRecord> findByOrderId(UUID orderId);
 }

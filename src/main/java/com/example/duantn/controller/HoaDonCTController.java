@@ -46,7 +46,7 @@ public class HoaDonCTController {
     public String detail(@PathVariable String id, Model model) {
         List<OrderDetailRecord> orderDetailList = hoaDonCtService.findByOrderId(UUID.fromString(id));
         model.addAttribute("orderDetailList", orderDetailList);
-        return "admin/HoaDonCTForm/detail";
+        return "admin/HoaDonForm/detail";
     }
 
     //delete
