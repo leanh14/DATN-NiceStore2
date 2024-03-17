@@ -249,6 +249,18 @@
                             <input type="text" class="form-control" id="orderId" readonly="true">
                         </div>
                         <div class="form-group">
+                            <label for="customerName">Tên khách hàng</label>
+                            <input type="text" class="form-control" id="customerName" readonly="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" class="form-control" id="address" readonly="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="text" class="form-control" id="phone" readonly="true">
+                        </div>
+                        <div class="form-group">
                             <label for="orderDate">Ngày mua</label>
                             <input type="date" class="form-control" id="orderDate" readonly="true">
                         </div>
@@ -269,7 +281,6 @@
                         <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Mã hóa đơn</th>
                             <th>Tên sản phẩm</th>
                             <th>Số lượng</th>
                             <th>Giá</th>
@@ -280,7 +291,6 @@
                         <c:forEach items="${orderDetailList}" var="orderDetail" varStatus="loop">
                         <tr>
                             <td>${loop.index + 1}</td>
-                            <td>${orderDetail.orderCode}</td>
                             <td>${orderDetail.productName}</td>
                             <td>${orderDetail.quantity}</td>
                             <td>${orderDetail.price}</td>
@@ -371,6 +381,9 @@
             document.getElementById('orderDate').value = data?.ngayMua;
             document.getElementById('payDate').value = data?.ngayThanhToan;
             document.getElementById('totalMoney').value = data?.tongTienThanhToan;
+            document.getElementById('customerName').value = data?.tenKH;
+            document.getElementById('address').value = data?.diaChi;
+            document.getElementById('phone').value = data?.soDT;
         });
 
 </script>
