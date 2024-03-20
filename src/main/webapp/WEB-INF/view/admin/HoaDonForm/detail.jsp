@@ -378,8 +378,8 @@
         .then(response => response.json())
         .then(data => {
             document.getElementById('orderId').value = data?.id;
-            document.getElementById('orderDate').value = data?.ngayMua;
-            document.getElementById('payDate').value = data?.ngayThanhToan;
+            document.getElementById('orderDate').value = new Date(data?.ngayMua).toISOString().split('T')[0];
+            document.getElementById('payDate').value = new Date(data?.ngayThanhToan).toISOString().split('T')[0];
             document.getElementById('totalMoney').value = data?.tongTienThanhToan;
             document.getElementById('customerName').value = data?.tenKH;
             document.getElementById('address').value = data?.diaChi;
